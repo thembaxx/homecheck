@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
+
+  --color-canvas: #f3f0e8;
+  --color-surface: #fbf9f4;
+  --color-sage: #d5e6de;
+  --color-lemon: #e6f25a;
+  --color-ink: #171715;
+  --color-muted: #6e6a62;
+  --color-line: #e4dfd4;
+
+  --radius-card: 1.75rem;
+  --shadow-soft: 0 22px 50px -28px rgb(23 23 21 / 0.45);
+}
+
+@layer base {
+  html {
+    @apply antialiased;
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    overflow-x: hidden;
+    background: var(--color-canvas);
+    color: var(--color-ink);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-lemon);
+    color: var(--color-ink);
+  }
+}
+
+.safe-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+.hc-pin,
+.hc-dot {
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgb(23 23 21 / 0.28);
+}
+
+.hc-pin {
+  width: 16px;
+  height: 16px;
+  background: var(--color-ink);
+  border: 3px solid var(--color-lemon);
+}
+
+.hc-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--color-sage);
+  border: 2px solid var(--color-ink);
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  background: var(--color-sage);
+  font-family: var(--font-sans);
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+  background: rgb(251 249 244 / 0.85);
+}
