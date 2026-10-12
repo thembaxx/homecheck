@@ -30,7 +30,7 @@ export async function downloadReport(place: Place, costs: CostInput) {
   doc.setFont("helvetica", "bold");
   write(place.address, 14, 1);
   doc.setFont("helvetica", "normal");
-  write(`${place.suburb}, ${place.city} \u00b7 ${place.tenure} \u00b7 ${place.beds} bed \u00b7 ${place.size}`, 11, 4);
+  write(`${place.suburb}, ${place.city} · ${place.tenure} · ${place.beds} bed · ${place.size}`, 11, 4);
 
   write(
     "This is not a valuation, not a Lightstone report, and not an offer. The price is the figure in this check. Station counts cover a whole police precinct. They do not measure safety on this street.",
@@ -67,7 +67,7 @@ export async function downloadReport(place: Place, costs: CostInput) {
   doc.setFont("helvetica", "bold");
   write(place.finance.name, 14, 2);
   doc.setFont("helvetica", "normal");
-  write(`${place.finance.opinion} \u00b7 ${place.finance.year}`, 11, 2);
+  write(`${place.finance.opinion} · ${place.finance.year}`, 11, 2);
   write(place.finance.summary, 10, 2);
   for (const line of [place.finance.unauthorised, place.finance.water, place.finance.electricity, place.finance.extra]) {
     if (line) write(line, 10, 1);
@@ -100,7 +100,7 @@ export async function downloadReport(place: Place, costs: CostInput) {
   doc.setFont("helvetica", "normal");
   for (const trip of place.commutes) {
     const mins = trip.minutes == null ? "No minute budgeted" : `${trip.minutes} min`;
-    write(`${trip.to} \u00b7 ${trip.mode} \u00b7 ${mins}. ${trip.note}`, 10, 1.5);
+    write(`${trip.to} · ${trip.mode} · ${mins}. ${trip.note}`, 10, 1.5);
   }
 
   y += 4;
