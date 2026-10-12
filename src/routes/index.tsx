@@ -130,16 +130,26 @@ function Home() {
             </div>
           </form>
           <div className="mt-3 flex gap-2 overflow-x-auto">
-            {REGIONS.map((item) => (
-              <button
-                key={item}
-                type="button"
-                onClick={() => setRegion(item)}
-                className={`h-11 shrink-0 rounded-full px-4 text-sm ${item === region ? "bg-ink text-canvas" : "bg-surface"}`}
-              >
-                {item}
-              </button>
-            ))}
+            {REGIONS.map((item) => {
+              const on = item === region;
+              return (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() => setRegion(item)}
+                  className={`relative h-11 shrink-0 overflow-hidden rounded-full px-4 text-sm ${on ? "text-canvas" : "bg-surface text-ink"}`}
+                >
+                  {on && (
+                    <motion.span
+                      layoutId="region-pill"
+                      className="absolute inset-0 bg-ink"
+                      transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 34 }}
+                    />
+                  )}
+                  <span className="relative">{item}</span>
+                </button>
+              );
+            })}
           </div>
           {lookupNote && <p className="mt-3 text-sm text-muted">{lookupNote}</p>}
         </div>
@@ -174,8 +184,13 @@ function Home() {
         <section className="mt-8">
           <h2 className="text-lg font-medium">From OpenStreetMap</h2>
           <ul className="mt-3 space-y-2">
-            {hits.map((hit) => (
-              <li key={`${hit.lat}-${hit.lng}`}>
+            {hits.map((hit, index) => (
+              <motion.li
+                key={`${hit.lat}-${hit.lng}`}
+                initial={reduce ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 380, damping: 34, delay: reduce ? 0 : index * 0.04 }}
+              >
                 <button
                   type="button"
                   className="flex w-full items-center justify-between gap-3 rounded-card bg-surface px-4 py-3 text-left"
@@ -191,7 +206,7 @@ function Home() {
                   </span>
                   <ArrowUpRight size={18} />
                 </button>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </section>
