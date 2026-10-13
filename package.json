@@ -20,7 +20,10 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "oxlint": "oxlint src/components src/routes src/styles.css src/router.tsx src/lib/places.ts src/lib/costs.ts src/lib/format.ts src/lib/store.ts src/lib/live.ts src/lib/pdf.ts src/lib/cn.ts",
-    "oxfmt": "oxfmt src/components src/routes src/router.tsx src/lib/places.ts src/lib/costs.ts src/lib/format.ts src/lib/store.ts src/lib/live.ts src/lib/pdf.ts src/lib/cn.ts"
+    "oxfmt": "oxfmt src/components src/routes src/router.tsx src/lib/places.ts src/lib/costs.ts src/lib/format.ts src/lib/store.ts src/lib/live.ts src/lib/pdf.ts src/lib/cn.ts",
+    "discovery": "node scripts/discovery.mjs",
+    "prebuild": "npm run discovery",
+    "prebuild:dev": "npm run discovery"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.4",

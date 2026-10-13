@@ -1,0 +1,28 @@
+# HomeCheck
+
+> Check South African home ownership costs, municipal audit context and police-precinct crime trends. Compare properties before buying with HomeCheck.
+
+Know the cost of coming home.
+
+## Features
+
+- South African suburb and address search with OpenStreetMap context
+- Editable bond and monthly ownership-cost assumptions
+- Dated municipal audit context and police-precinct crime counts
+- Nearby amenities and commute assumptions
+- Browser-local saved checks, comparisons and PDF reports
+
+## Scope and privacy
+
+- The current preview takes no payments. R99, R199 and R299 packs are proposed pricing, not connected checkout.
+- Example asking prices are indicative inputs, not live listings or licensed valuations.
+- Police-station counts describe a precinct and never establish the safety of a street or property.
+- Municipal audit outcomes are dated context, not a prediction of service quality for a selected address.
+- Saved checks and personal budget assumptions stay in this browser and are excluded from public discovery files.
+- Photos and the interactive house are representative; no building survey, deeds search or title verification is provided.
+
+## Reference links
+
+- [Auditor-General South Africa](https://www.agsa.co.za/)
+- [SAPS crime statistics](https://www.saps.gov.za/services/crimestats.php)
+- [OpenStreetMap](https://www.openstreetmap.org/)

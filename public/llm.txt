@@ -1,0 +1,15 @@
+# HomeCheck
+
+> Check South African home ownership costs, municipal audit context and police-precinct crime trends. Compare properties before buying with HomeCheck.
+
+The current preview takes no payments. R99, R199 and R299 packs are proposed pricing, not connected checkout. Example asking prices are indicative inputs, not live listings or licensed valuations. Police-station counts describe a precinct and never establish the safety of a street or property. Municipal audit outcomes are dated context, not a prediction of service quality for a selected address. Saved checks and personal budget assumptions stay in this browser and are excluded from public discovery files. Photos and the interactive house are representative; no building survey, deeds search or title verification is provided.
+
+## Product
+
+- [Product overview](https://homecheck-navy.vercel.app/about.html): Features, scope, reference links and privacy.
+- [Plain-text overview](https://homecheck-navy.vercel.app/about.md): Public product documentation.
+- [Open the app](https://homecheck-navy.vercel.app/): Interactive app; requires JavaScript.
+
+## Optional
+
+- [Full public context](https://homecheck-navy.vercel.app/llms-full.txt): Complete public product overview.

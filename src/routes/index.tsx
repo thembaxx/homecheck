@@ -11,6 +11,7 @@ import { zarCompact } from "@/lib/format";
 import { searchMap } from "@/lib/live";
 import { filterPlaces, materialise, REGIONS, type GeoHit, type Region } from "@/lib/places";
 import { useCheckStore } from "@/lib/store";
+import brand from "../brand.json";
 
 const HouseScene = lazy(() => import("@/components/house-scene"));
 
@@ -21,7 +22,13 @@ const LAYERS: Array<{ key: keyof HouseLayers; label: string }> = [
   { key: "garden", label: "Tree" },
 ];
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({
+  head: () => ({
+    links: [{ rel: "canonical", href: `${brand.url}/` }],
+    meta: [{ property: "og:url", content: `${brand.url}/` }],
+  }),
+  component: Home,
+});
 
 function Home() {
   const reduce = useReducedMotion();
@@ -84,18 +91,20 @@ function Home() {
 
       <section className="mt-8 grid items-start gap-8 md:grid-cols-2">
         <div>
-          <p className="text-sm text-muted">Property intelligence for people buying, not listing.</p>
+          <p className="text-sm text-muted">{brand.tagline}</p>
           <h1 className="mt-2 text-4xl font-medium tracking-tight md:text-6xl">
             Hello. What will this house cost to live in?
           </h1>
           <p className="mt-4 max-w-md text-lg text-muted">
-            Listings show the kitchen. HomeCheck adds the bond, the rates, the city’s audit, and the police station’s year — with the limits written on the page.
+            Listings show the kitchen. HomeCheck adds the bond, the rates, the city’s audit, and the
+            police station’s year — with the limits written on the page.
           </p>
           <div className="mt-6 flex items-center gap-4">
             <div
               className="grid size-24 shrink-0 place-items-center rounded-full"
               style={{
-                background: "conic-gradient(var(--color-lemon) 0 12.5%, var(--color-line) 12.5% 100%)",
+                background:
+                  "conic-gradient(var(--color-lemon) 0 12.5%, var(--color-line) 12.5% 100%)",
               }}
               aria-hidden="true"
             >
@@ -104,7 +113,9 @@ function Home() {
               </div>
             </div>
             <p className="max-w-xs text-sm">
-              <span className="font-medium">One metro had a clean audit in 2023-24.</span> Cape Town. Johannesburg, eThekwini and the others did not. That is the kind of fact a listing leaves out.
+              <span className="font-medium">One metro had a clean audit in 2023-24.</span> Cape
+              Town. Johannesburg, eThekwini and the others did not. That is the kind of fact a
+              listing leaves out.
             </p>
           </div>
 
@@ -143,7 +154,9 @@ function Home() {
                     <motion.span
                       layoutId="region-pill"
                       className="absolute inset-0 bg-ink"
-                      transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 34 }}
+                      transition={
+                        reduce ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 34 }
+                      }
                     />
                   )}
                   <span className="relative">{item}</span>
@@ -176,7 +189,9 @@ function Home() {
               );
             })}
           </div>
-          <p className="absolute left-4 top-4 max-w-48 text-sm">Drag the erf. The listing never shows the wall, the tank or the meter.</p>
+          <p className="absolute left-4 top-4 max-w-48 text-sm">
+            Drag the erf. The listing never shows the wall, the tank or the meter.
+          </p>
         </div>
       </section>
 
@@ -189,7 +204,12 @@ function Home() {
                 key={`${hit.lat}-${hit.lng}`}
                 initial={reduce ? false : { opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 380, damping: 34, delay: reduce ? 0 : index * 0.04 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 380,
+                  damping: 34,
+                  delay: reduce ? 0 : index * 0.04,
+                }}
               >
                 <button
                   type="button"
@@ -228,7 +248,11 @@ function Home() {
             >
               <Link to="/check/$placeId" params={{ placeId: place.id }} className="block">
                 <div className="relative h-64 overflow-hidden rounded-card">
-                  <img src={place.photo} alt={place.photoAlt} className="h-full w-full object-cover" />
+                  <img
+                    src={place.photo}
+                    alt={place.photoAlt}
+                    className="h-full w-full object-cover"
+                  />
                   <p className="absolute left-3 top-3 flex items-center gap-2 rounded-full bg-surface px-3 py-1 text-sm">
                     <span className="size-2 rounded-full bg-lemon" />
                     {place.tenure === "Freehold" ? "Freehold" : "Sectional"}
@@ -250,7 +274,9 @@ function Home() {
           ))}
         </div>
         {places.length === 0 && (
-          <p className="mt-4 text-muted">Nothing in this set matches. Search the map for a street.</p>
+          <p className="mt-4 text-muted">
+            Nothing in this set matches. Search the map for a street.
+          </p>
         )}
       </section>
 
@@ -261,11 +287,27 @@ function Home() {
         </p>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {[
-            { price: "R99", name: "Snapshot", text: "One address. Amenities, commute assumptions, municipal opinion." },
-            { price: "R199", name: "Buyer report", text: "Your bond, rates and levy, a PDF, and the station year with its limits.", lemon: true },
-            { price: "R299", name: "Compare pack", text: "Three addresses side by side, so the cheaper listing can lose." },
+            {
+              price: "R99",
+              name: "Snapshot",
+              text: "One address. Amenities, commute assumptions, municipal opinion.",
+            },
+            {
+              price: "R199",
+              name: "Buyer report",
+              text: "Your bond, rates and levy, a PDF, and the station year with its limits.",
+              lemon: true,
+            },
+            {
+              price: "R299",
+              name: "Compare pack",
+              text: "Three addresses side by side, so the cheaper listing can lose.",
+            },
           ].map((tier) => (
-            <article key={tier.name} className={`rounded-card p-5 ${tier.lemon ? "bg-lemon" : "bg-surface"}`}>
+            <article
+              key={tier.name}
+              className={`rounded-card p-5 ${tier.lemon ? "bg-lemon" : "bg-surface"}`}
+            >
               <p className="text-sm">{tier.name}</p>
               <p className="font-serif text-4xl tracking-tight">{tier.price}</p>
               <p className="mt-2 text-sm">{tier.text}</p>
@@ -276,9 +318,17 @@ function Home() {
 
       <footer className="mt-14 space-y-2 pb-4 text-sm text-muted">
         <p>
-          Photographs are from Unsplash and are not these addresses. Crime figures are SAPS precinct totals via SafeSuburb, not a street score. Municipal opinions are from the Auditor-General’s 2023-24 MFMA report, except Stellenbosch’s 2024-25 audit. Prime is 10.50% as of May 2026.
+          Photographs are from Unsplash and are not these addresses. Crime figures are SAPS precinct
+          totals via SafeSuburb, not a street score. Municipal opinions are from the
+          Auditor-General’s 2023-24 MFMA report, except Stellenbosch’s 2024-25 audit. Prime is
+          10.50% as of May 2026.
         </p>
         <p>HomeCheck does not value property and does not take a payment in this preview.</p>
+        <p>
+          <a href="/about.html" className="underline">
+            About HomeCheck, sources & privacy
+          </a>
+        </p>
       </footer>
     </div>
   );
