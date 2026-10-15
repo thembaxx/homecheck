@@ -3,7 +3,15 @@ import { budget } from "@/lib/costs";
 import { zar } from "@/lib/format";
 import { resolvePlace, useCheckStore, useStoreReady } from "@/lib/store";
 
-export const Route = createFileRoute("/compare")({ component: ComparePage });
+export const Route = createFileRoute("/compare")({
+  head: () => ({
+    meta: [
+      { title: "Your property comparison | HomeCheck" },
+      { name: "robots", content: "noindex, follow" },
+    ],
+  }),
+  component: ComparePage,
+});
 
 function ComparePage() {
   const ready = useStoreReady();
@@ -24,8 +32,13 @@ function ComparePage() {
       ) : ids.length < 2 ? (
         <div className="mt-8 rounded-card bg-sage p-6">
           <p className="text-2xl font-medium">Save two addresses first.</p>
-          <p className="mt-2 text-muted">Open a place, set the price you were quoted, and tap Save.</p>
-          <Link to="/" className="mt-5 inline-flex h-12 items-center rounded-full bg-ink px-5 text-canvas">
+          <p className="mt-2 text-muted">
+            Open a place, set the price you were quoted, and tap Save.
+          </p>
+          <Link
+            to="/"
+            className="mt-5 inline-flex h-12 items-center rounded-full bg-ink px-5 text-canvas"
+          >
             Find an address
           </Link>
         </div>
@@ -62,7 +75,9 @@ function ComparePage() {
                 >
                   <p className="text-sm text-muted">{place.city}</p>
                   <h2 className="text-2xl font-medium">{place.suburb}</h2>
-                  <p className="mt-4 font-serif text-4xl tracking-tight tabular-nums">{zar(model.total)}</p>
+                  <p className="mt-4 font-serif text-4xl tracking-tight tabular-nums">
+                    {zar(model.total)}
+                  </p>
                   <p className="text-sm text-muted">a month</p>
                   <dl className="mt-4 space-y-2 text-sm">
                     <Row label="Price" value={zar(model.price)} />
